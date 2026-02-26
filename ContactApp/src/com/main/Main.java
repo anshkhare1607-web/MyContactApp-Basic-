@@ -1,14 +1,14 @@
 package com.main;
-
 import com.userregistration.*;
+import com.authentication.*;
 import java.util.*;
+
+//Main function
 public class Main {
-	
-	
 	public static void main(String[] args) {
 		Scanner sc  = new Scanner(System.in);
-		List<User> userList = new ArrayList<>();
-		HashMap<String, String> credentials = new HashMap<>();
+		List<User> userList = new ArrayList<>(); //for storing user objects
+		HashMap<String, String> credentials = new HashMap<>(); //for storing email and passwords
 		boolean running = true;
 		while(running) {
 			System.out.println("===MENU===");
@@ -20,14 +20,13 @@ public class Main {
 			sc.nextLine();
 			switch(choice) {
 			case 1:
-				NewUser.registerUser(sc,userList,credentials);
+				NewUser.registerUser(sc,userList,credentials); //creating new user
 				break;
-			
 			case 2:
-				//loginUser(sc);
+				LoginHandler.handleLogin(sc, userList); //logging in using authentication
 				break;
 			case 3:
-				System.out.println("Exiting");
+				System.out.println("Exiting"); //exiting the app
 				running = false;
 				break;
 			default:
@@ -36,7 +35,7 @@ public class Main {
 		}
 		System.out.println();
 		for(User us : userList) {
-			us.showUserDetails();
+			us.showUserDetails(); //displaying user details
 			System.out.println();
 		}
 	}

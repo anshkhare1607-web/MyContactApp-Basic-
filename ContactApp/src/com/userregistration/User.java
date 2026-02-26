@@ -1,5 +1,6 @@
 package com.userregistration;
 
+//Base class User for storing email, passwordhash and UserProfile
 public abstract class User {
 	private String email;
 	private String passwordHash;
@@ -10,7 +11,8 @@ public abstract class User {
 		this.passwordHash = passwordHash;
 		this.profile = profile;
 	}
-
+	
+	//setter and getter functions for ensuring encapsulation
 	public String getEmail() {
 		return email;
 	}

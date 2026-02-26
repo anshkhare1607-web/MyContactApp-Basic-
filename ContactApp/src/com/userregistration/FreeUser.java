@@ -1,8 +1,9 @@
 package com.userregistration;
 
+//Class for free user type account
 public class FreeUser extends User {
 	public FreeUser(String email,String passwordHash,UserProfile profile) {
-		super(email,passwordHash,profile);
+		super(email,passwordHash,profile); //Calling the User class (Parent)
 	}
 	
 	//Override
