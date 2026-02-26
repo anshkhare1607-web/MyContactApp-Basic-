@@ -23,7 +23,10 @@ public class Main {
 				NewUser.registerUser(sc,userList,credentials); //creating new user
 				break;
 			case 2:
-				LoginHandler.handleLogin(sc, userList); //logging in using authentication
+				Optional<User> LoggedUser = LoginHandler.handleLogin(sc, userList); //logging in using authentication
+				if(LoggedUser.isPresent()) {
+					ProfileManager.manageProfile(sc,LoggedUser.get(),credentials);
+				}
 				break;
 			case 3:
 				System.out.println("Exiting"); //exiting the app

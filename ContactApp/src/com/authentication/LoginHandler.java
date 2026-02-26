@@ -4,7 +4,7 @@ import com.userregistration.*;
 
 //handling the login method from the main function
 public class LoginHandler {
-	public static void handleLogin(Scanner sc, List<User> userList) {
+	public static Optional<User> handleLogin(Scanner sc, List<User> userList) {
 		System.out.println("\n====LOGIN OPTIONS====");
 		System.out.println("1. BasicAuth (First Name, Last Name, Password");
 		System.out.println("2. OpenAuth (Email, Password");
@@ -21,7 +21,7 @@ public class LoginHandler {
 		}
 		else {
 			System.out.println("Invalid choice");
-			return;
+			return Optional.empty();
 		}
 		Optional<User> LoggedUser = authMethod.authenticate(sc,userList); //calling authenticate function 
 		if(LoggedUser.isPresent()) {
@@ -31,6 +31,7 @@ public class LoginHandler {
 		else {
 			System.out.println("Login Failed, Invalid Credentials");
 		}
+		return LoggedUser;
 	}
 
 }
