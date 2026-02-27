@@ -2,6 +2,8 @@ package com.userregistration;
 
 import java.util.*;
 
+import com.contact.ContactManager;
+
 //For updating the user details
 public class ProfileManager {
 	public static void manageProfile(Scanner sc, User LoggedUser,HashMap<String,String> credentials) {
@@ -14,7 +16,10 @@ public class ProfileManager {
 			System.out.println("4. Update Mobile Number");
 			System.out.println("5. Update Password");
 			System.out.println("6. View Profile");
-			System.out.println("7. Logout");
+			System.out.println("7. Add new Contact");
+			System.out.println("8. View Contacts");
+			System.out.println("9. Logout");
+
 			
 			System.out.print("Enter your Choice : ");
 			String choice = sc.nextLine();
@@ -86,8 +91,14 @@ public class ProfileManager {
 			case "6":
 				LoggedUser.showUserDetails();
 				break;
-			
 			case "7":
+				ContactManager.createContact(sc, LoggedUser); //creating contacts
+				break;
+			case "8":
+				ContactManager.viewContacts(LoggedUser); //displaying contacts
+				break;
+				
+			case "9":
 				System.out.println("Logging out");
 				manage = false;
 				break;
