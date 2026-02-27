@@ -17,6 +17,13 @@ public abstract class Contact {
 		this.mobileNumbers = new ArrayList<>(); //list for storing multiple mobile numbers
 		this.emails = new ArrayList<>(); //list for storing emails
 	}
+	
+	public UUID getID() {
+		return id;
+	}
+	public LocalDateTime getCreatedTime() {
+		return createdAt; 
+	}
 	public void addMobileNumber(MobileNumber mobile) {
 		this.mobileNumbers.add(mobile);
 	}

@@ -1,9 +1,7 @@
-/*UC-04: Create Contact
+/*UC-04:View Contact
 @author : Developer
-version : 4.0
+version : 5.0
 */
-
-
 package com.main;
 import com.userregistration.*;
 import com.authentication.*;

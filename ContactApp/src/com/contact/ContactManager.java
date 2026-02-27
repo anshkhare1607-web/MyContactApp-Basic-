@@ -61,7 +61,6 @@ public class ContactManager {
 		loggedUser.getContacts().add(newContact); //Adding loggedUser object to the List
 		System.out.println("Contact Added Successfully");
 	}
-	
 	//Displaying the contacts
 	public static void viewContacts(User loggedUser) {
 		System.out.println("\n====Your Contacts====");
