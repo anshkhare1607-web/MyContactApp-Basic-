@@ -42,6 +42,7 @@ public class PersonContact extends Contact{
 	//override
 	public void displayContact() {
 		System.out.printf("Person: %s %s%n",fname,lname);
+		System.out.printf("Tags: %s%n",getTags());
 		System.out.printf("Contact ID : %s%n",getID());
 		System.out.printf("Created at : %s%n",getCreatedTime()); 
 		for(MobileNumber m : getMobileNumbers()) {

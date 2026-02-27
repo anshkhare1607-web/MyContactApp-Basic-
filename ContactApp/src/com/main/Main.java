@@ -1,6 +1,6 @@
-/*UC-07 : Delete the contacts
+/*UC-08 : Bulk Operations on Contacts
 @author : Developer
-version : 7.0
+version : 8.0
 */
 package com.main;
 import com.userregistration.*;

@@ -10,12 +10,15 @@ public abstract class Contact {
 	private LocalDateTime createdAt;
 	private List<MobileNumber> mobileNumbers;
 	private List<Email> emails;
+	private List<String> tags; //for storing tags
 	
 	public Contact() {
 		this.id = UUID.randomUUID(); //generating a random UUID
 		this.createdAt = LocalDateTime.now(); //Time of creation of contact
 		this.mobileNumbers = new ArrayList<>(); //list for storing multiple mobile numbers
 		this.emails = new ArrayList<>(); //list for storing emails
+		this.tags = new ArrayList<>(); //initialize
+		
 	}
 	
 	//deep copy 
@@ -32,6 +35,7 @@ public abstract class Contact {
 		for(Email e : contact.emails) {
 			this.emails.add(new Email(e));
 		}
+		this.tags = new ArrayList<>(this.tags);
 	}
 	
 	public UUID getID() {
@@ -39,12 +43,17 @@ public abstract class Contact {
 	}
 	public LocalDateTime getCreatedTime() {
 		return createdAt; 
-	}
+	} 
 	public void addMobileNumber(MobileNumber mobile) {
 		this.mobileNumbers.add(mobile);
 	}
 	public void addEmail(Email email) {
 		this.emails.add(email);
+	}
+	public void addTags(String tag) {
+		if(tag!=null && !tag.isEmpty()) {
+			this.tags.add(tag);
+		}
 	}
 	
 	//Returns Defensive shallow copy of the list to protect internal state
@@ -57,6 +66,9 @@ public abstract class Contact {
 		return new ArrayList<>(mobileNumbers);
 	}
 	
+	public List<String> getTags(){
+		return new ArrayList<>(tags);
+	}
 	public abstract void displayContact();
 	
 	
