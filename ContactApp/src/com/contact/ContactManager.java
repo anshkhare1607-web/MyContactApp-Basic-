@@ -4,6 +4,8 @@ import com.userregistration.User;
 import java.util.Optional;
 import java.util.Scanner;
 
+
+//class for managing contact (personal or organizational)
 public class ContactManager {
     public static void createContact(Scanner sc, User loggedInUser) {
         System.out.println("\n=== CREATE CONTACT ===");
@@ -65,12 +67,14 @@ public class ContactManager {
             Contact c = loggedInUser.getContacts().get(i);
             if (c instanceof PersonContact) {
                 System.out.printf("%d. [Person] %s %s%n", i + 1, ((PersonContact) c).getFirstName(), ((PersonContact) c).getLastName());
+                c.displayContact();
             } else if (c instanceof OrganizationContact) {
-                System.out.printf("%d. [Organization] %s%n", i + 1, ((OrganizationContact) c).getOrgName());
+                System.out.printf("%d. [Organization] %s%n", i + 1, ((OrganizationContact) c).getOrgName(), ((OrganizationContact) c).getWebsite());
             }
         }
     }
 
+    //displaying the contact details
     public static void viewContactDetails(Scanner sc, User loggedInUser) {
         viewContactsList(loggedInUser);
         if (loggedInUser.getContacts().isEmpty()) return;
@@ -92,10 +96,68 @@ public class ContactManager {
         }
     }
 
+    //using index for editing
     private static Optional<Contact> getContactByIndex(User user, int index) {
         if (index >= 0 && index < user.getContacts().size()) {
             return Optional.of(user.getContacts().get(index));
         }
         return Optional.empty();
+    }
+    
+    public static void editContact(Scanner sc, User loggedInUser) {
+        System.out.println("\n=== EDIT CONTACT ===");
+        viewContactsList(loggedInUser); 
+        if (loggedInUser.getContacts().isEmpty()) return;
+
+        System.out.print("\nEnter the number of the contact to edit: ");
+        try {
+            int index = Integer.parseInt(sc.nextLine()) - 1;
+            if (index < 0 || index >= loggedInUser.getContacts().size()) {
+                System.out.println("Invalid contact number.");
+                return;
+            }
+
+            Contact originalContact = loggedInUser.getContacts().get(index);
+            Contact modifiedCopy = null;
+
+            // 1. Create a defensive deep copy using the copy constructor
+            if (originalContact instanceof PersonContact) {
+                modifiedCopy = new PersonContact((PersonContact) originalContact);
+            } else if (originalContact instanceof OrganizationContact) {
+                modifiedCopy = new OrganizationContact((OrganizationContact) originalContact);
+            }
+
+            // 2. Perform modifications on the copy with validation
+            if (modifiedCopy instanceof PersonContact) {
+                PersonContact pc = (PersonContact) modifiedCopy;
+                System.out.print("Enter new First Name (Leave blank to keep '" + pc.getFirstName() + "'): ");
+                String fName = sc.nextLine();
+                if (!fName.isEmpty()) pc.setFirstName(fName); //  validation
+
+                System.out.print("Enter new Last Name (Leave blank to keep '" + pc.getLastName() + "'): ");
+                String lName = sc.nextLine();
+                if (!lName.isEmpty()) pc.setLastName(lName); //  validation
+            } else if (modifiedCopy instanceof OrganizationContact) {
+                OrganizationContact oc = (OrganizationContact) modifiedCopy;
+                System.out.print("Enter new Organization Name (Leave blank to keep '" + oc.getOrgName() + "'): ");
+                String orgName = sc.nextLine();
+                if (!orgName.isEmpty()) oc.setOrgName(orgName); // validation
+
+                System.out.print("Enter new Website (Leave blank to keep '" + oc.getWebsite() + "'): ");
+                String website = sc.nextLine();
+                if (!website.isEmpty()) oc.setWebsite(website);
+            }
+
+            // 3. State change is committed ONLY if all validations passed
+            loggedInUser.getContacts().set(index, modifiedCopy);
+            System.out.println("Contact updated successfully!"); 
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+        } catch (IllegalArgumentException e) {
+            // Rejects everything if validation fails on the copy
+            System.out.println("Validation Error: " + e.getMessage());
+            System.out.println("Edit aborted. Original contact remains unchanged");
+        }
     }
 }

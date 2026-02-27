@@ -7,9 +7,32 @@ public class OrganizationContact extends Contact{
 	private String website; //Website of the organization
 	
 	public OrganizationContact(String orgName,String website) {
+		super();
+		setOrgName(orgName);
+		setWebsite(website);
+	}
+	
+	//copy constructor
+	public OrganizationContact(OrganizationContact contact) {
+		super(contact);
 		this.orgName = orgName;
 		this.website = website;
 	}
+	
+	public void setOrgName(String orgName) {
+		if(orgName == null || orgName.isEmpty()) {
+			throw new IllegalArgumentException("Organizaation name can't be empty");
+		}
+		this.orgName = orgName;
+	}
+	public void setWebsite(String website) {
+		if(website == null || website.isEmpty()) {
+			throw new IllegalArgumentException("Email can't be empty");
+		}
+		this.website = website;
+	}
+	
+	
 	 public String getOrgName() {
 		 return orgName;
 	 }

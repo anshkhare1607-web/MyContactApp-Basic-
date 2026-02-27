@@ -19,7 +19,8 @@ public class ProfileManager {
             System.out.println("7. Add New Contact");
             System.out.println("8. View Contacts List");
             System.out.println("9. View Specific Contact Details");
-            System.out.println("10. Logout");
+            System.out.println("10. Edit Contact");
+            System.out.println("11. Logout");
             System.out.print("Enter your choice: ");
             
             String choice = sc.nextLine();
@@ -95,6 +96,9 @@ public class ProfileManager {
                     ContactManager.viewContactDetails(sc, loggedInUser);
                     break;
                 case "10":
+                	ContactManager.editContact(sc, loggedInUser);
+                	break;
+                case "11":
                     System.out.println("Logging out");
                     managing = false;
                     break;

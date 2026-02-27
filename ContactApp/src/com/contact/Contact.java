@@ -18,6 +18,22 @@ public abstract class Contact {
 		this.emails = new ArrayList<>(); //list for storing emails
 	}
 	
+	//deep copy 
+	protected Contact(Contact contact) {
+		this.id = contact.id;
+		this.createdAt = contact.createdAt;
+		
+		//copy constructor for lists
+		this.mobileNumbers = new ArrayList<>();
+		for(MobileNumber m : contact.mobileNumbers) {
+			this.mobileNumbers.add(new MobileNumber(m));
+		}
+		this.emails = new ArrayList<>();
+		for(Email e : contact.emails) {
+			this.emails.add(new Email(e));
+		}
+	}
+	
 	public UUID getID() {
 		return id;
 	}
@@ -30,11 +46,15 @@ public abstract class Contact {
 	public void addEmail(Email email) {
 		this.emails.add(email);
 	}
-	public List<MobileNumber> getMobileNumbers(){
-		return mobileNumbers;
-	}
+	
+	//Returns Defensive shallow copy of the list to protect internal state
 	public List<Email> getEmails(){
-		return emails;
+		return new ArrayList<>(emails);
+	}
+	
+	//Returns Defensive shallow copy of the list to protect internal state
+	public List<MobileNumber> getMobileNumbers(){
+		return new ArrayList<>(mobileNumbers);
 	}
 	
 	public abstract void displayContact();

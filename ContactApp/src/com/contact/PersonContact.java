@@ -8,15 +8,36 @@ public class PersonContact extends Contact{
 	
 	public PersonContact(String fname,String lname) {
 		super();
-		this.fname = fname;
-		this.lname = lname;
+		setFirstName(fname);
+		setLastName(lname);
+	}
+	
+	//copy constructor
+	public PersonContact(PersonContact contact) {
+		super(contact); // Calls contact copy constructor for deep copy of base fields
+		this.fname = contact.fname;
+		this.lname = contact.lname;
 	}
 	
 	public String getFirstName() {
 		return fname;
 	}
+	
+	public void setFirstName(String fname) {
+		if(fname == null || fname.isEmpty()) {
+			throw new IllegalArgumentException("First name can't be empty");
+		}
+		this.fname = fname;
+	}
 	public String getLastName() {
 		return lname;
+	}
+	
+	public void setLastName(String lname) {
+		if(lname == null || lname.isEmpty()) {
+			throw new IllegalArgumentException("Last name can't be empty");
+		}
+		this.lname = lname;
 	}
 	//override
 	public void displayContact() {

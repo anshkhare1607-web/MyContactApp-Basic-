@@ -1,6 +1,6 @@
-/*UC-04:View Contact
+/*UC-06:Update the contacts
 @author : Developer
-version : 5.0
+version : 6.0
 */
 package com.main;
 import com.userregistration.*;
