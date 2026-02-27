@@ -1,6 +1,6 @@
-/*UC-06:Update the contacts
+/*UC-07 : Delete the contacts
 @author : Developer
-version : 6.0
+version : 7.0
 */
 package com.main;
 import com.userregistration.*;
