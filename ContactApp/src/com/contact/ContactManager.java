@@ -70,6 +70,7 @@ public class ContactManager {
                 c.displayContact();
             } else if (c instanceof OrganizationContact) {
                 System.out.printf("%d. [Organization] %s%n", i + 1, ((OrganizationContact) c).getOrgName(), ((OrganizationContact) c).getWebsite());
+                c.displayContact();
             }
         }
     }
@@ -160,4 +161,44 @@ public class ContactManager {
             System.out.println("Edit aborted. Original contact remains unchanged");
         }
     }
+    
+    public static void deleteContact(Scanner sc, User loggedInUser) {
+    System.out.println("\n=== DELETE CONTACT ===");
+    viewContactsList(loggedInUser); 
+    
+    if (loggedInUser.getContacts().isEmpty()) return;
+
+    System.out.print("\nEnter the number of the contact to delete: ");
+    try {
+        int index = Integer.parseInt(sc.nextLine()) - 1;
+        
+        if (index < 0 || index >= loggedInUser.getContacts().size()) {
+            System.out.println("Invalid contact number.");
+            return;
+        }
+
+        // Exception Handling: Catching valid index but just to be safe
+        Contact contactToDelete = loggedInUser.getContacts().get(index);
+        
+        // Confirmation Dialog before state change
+        System.out.print("Are you SURE you want to delete this contact?(y/n): ");
+        String confirmation = sc.nextLine();
+        
+        if (confirmation.equalsIgnoreCase("y")) {
+            // Lifecycle Management: HARD DELETE (Object reference is removed from the collection)
+            loggedInUser.getContacts().remove(index);
+            
+           
+            
+            System.out.println("Contact deleted successfully.");
+        } else {
+            System.out.println("Deletion aborted. Contact is safe.");
+        }
+
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid input. Please enter a valid numerical ID.");
+    } catch (Exception e) {
+        System.out.println("An unexpected error occurred during deletion: " + e.getMessage());
+    }
+}
 }
