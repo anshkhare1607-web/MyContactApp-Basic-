@@ -1,6 +1,6 @@
-/*UC-10 : Filter Contact
+/*UC-11 : Manage Tags
 @author : Developer
-version : 10.0
+version : 11.0
 */
 package com.main;
 import com.userregistration.*;
