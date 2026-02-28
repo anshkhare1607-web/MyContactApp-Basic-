@@ -45,6 +45,8 @@ public class OrganizationContact extends Contact{
 		System.out.printf("Tags: %s%n",getTags());
 		System.out.printf("Contact ID : %s%n",getID());
 		System.out.printf("Created at : %s%n",getCreatedTime()); 
+		System.out.printf("Total Interactions : %s%n", getInteractionCount());
+
 		for(MobileNumber m : getMobileNumbers()) {
 			System.out.println(" "+m);
 		}

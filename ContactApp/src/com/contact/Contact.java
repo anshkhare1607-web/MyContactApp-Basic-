@@ -11,6 +11,7 @@ public abstract class Contact {
 	private List<MobileNumber> mobileNumbers;
 	private List<Email> emails;
 	private List<String> tags; //for storing tags
+	private int interactionCount;
 	
 	public Contact() {
 		this.id = UUID.randomUUID(); //generating a random UUID
@@ -18,9 +19,11 @@ public abstract class Contact {
 		this.mobileNumbers = new ArrayList<>(); //list for storing multiple mobile numbers
 		this.emails = new ArrayList<>(); //list for storing emails
 		this.tags = new ArrayList<>(); //initialize
+		this.interactionCount = 0; //storing interaction count for filtering
 		
 	}
 	
+
 	//deep copy 
 	protected Contact(Contact contact) {
 		this.id = contact.id;
@@ -36,6 +39,7 @@ public abstract class Contact {
 			this.emails.add(new Email(e));
 		}
 		this.tags = new ArrayList<>(this.tags);
+		this.interactionCount = contact.interactionCount;
 	}
 	
 	public UUID getID() {
@@ -55,6 +59,15 @@ public abstract class Contact {
 			this.tags.add(tag);
 		}
 	}
+	
+	public int getInteractionCount() {
+		return interactionCount;
+	}
+
+	public void incrementInteraction() {
+		this.interactionCount++;
+	}
+
 	
 	//Returns Defensive shallow copy of the list to protect internal state
 	public List<Email> getEmails(){

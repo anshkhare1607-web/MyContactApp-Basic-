@@ -89,6 +89,7 @@ public class ContactManager {
 			Optional<Contact> selectedContact = getContactByIndex(loggedInUser, index);
 
 			if (selectedContact.isPresent()) {
+				selectedContact.get().incrementInteraction(); // increasing interaction count
 				System.out.println("\n--- Full Contact Details ---");
 				selectedContact.get().displayContact();
 				System.out.println("----------------------------");

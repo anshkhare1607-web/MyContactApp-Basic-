@@ -24,6 +24,7 @@ public class ProfileManager {
             System.out.println("11. Delete Contact");
             System.out.println("12. Bulk Operations");
             System.out.println("13. Search Contacts");
+            System.out.println("14. Filter/Sort contacts");
             System.out.println("14. Logout");
             System.out.print("Enter your choice: ");
             
@@ -99,7 +100,7 @@ public class ProfileManager {
                 case "9": //specific contact details
                     ContactManager.viewContactDetails(sc, loggedInUser);
                     break;
-                case "10": //editign contact
+                case "10": //editing contact
                 	ContactManager.editContact(sc, loggedInUser);
                 	break;
                 case "11": //deleting contact
@@ -111,7 +112,10 @@ public class ProfileManager {
                 case "13": //searching contact
                 	SearchManager.performSearch(sc, loggedInUser);
                 	break;
-                case "14": //logout
+                case "14":
+                	FilterManager.applyFilter(sc, loggedInUser);
+                	break;
+                case "15": //logout
                     System.out.println("Logging out");
                     managing = false;
                     break;
