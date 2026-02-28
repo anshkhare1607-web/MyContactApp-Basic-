@@ -27,7 +27,8 @@ public class ProfileManager {
             System.out.println("13. Search Contacts");
             System.out.println("14. Filter/Sort contacts");
             System.out.println("15. Manage Tags");
-            System.out.println("16. Logout");
+            System.out.println("16. Apply/Remove Tags");
+            System.out.println("17. Logout");
             System.out.print("Enter your choice: ");
             
             String choice = sc.nextLine();
@@ -119,7 +120,11 @@ public class ProfileManager {
                 	break;
                 case "15": //Manage tags
                 	TagManager.manageTags(sc, loggedInUser); 
-                case "16": //logout
+                	break;
+                case "16" : //adding removing tags to contacts
+                	ContactManager.manageContactTags(sc, loggedInUser); 
+                	break;
+                case "17": //logout
                     System.out.println("Logging out");
                     managing = false;
                     break;

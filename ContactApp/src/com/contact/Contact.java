@@ -57,6 +57,11 @@ public abstract class Contact {
 			this.tags.add(tag);
 		}
 	}
+	public void removeTag(Tag tag) {
+		if(tag !=null) {
+			this.tags.remove(tag);
+		}
+	}
 	public Set<Tag> getTags(){
 		return new HashSet<>(tags);
 	}

@@ -271,4 +271,94 @@ public class ContactManager {
 			}
 		}
 	}
+	//Adding anmd deleting tags
+    public static void manageContactTags(Scanner sc, User loggedInUser) {
+        System.out.println("\n=== APPLY/REMOVE TAGS ===");
+        viewContactsList(loggedInUser);
+        if (loggedInUser.getContacts().isEmpty()) return;
+
+        System.out.print("\nEnter the number of the contact to manage tags: ");
+        try {
+            int index = Integer.parseInt(sc.nextLine()) - 1;
+            if (index < 0 || index >= loggedInUser.getContacts().size()) {
+                System.out.println("Invalid contact number.");
+                return;
+            }
+
+            Contact selectedContact = loggedInUser.getContacts().get(index);
+            
+            boolean managingTags = true;
+            while (managingTags) {
+                System.out.println("\n--- Manage Tags for Selected Contact ---");
+                System.out.println("Current Tags: " + (selectedContact.getTags().isEmpty() ? "None" : selectedContact.getTags()));
+                System.out.println("1. Add Tag");
+                System.out.println("2. Remove Tag");
+                System.out.println("3. Back");
+                System.out.print("Enter your choice: ");
+                
+                String choice = sc.nextLine();
+                switch (choice) {
+                    case "1": //creating tags
+                        if (loggedInUser.getAvailableTags().isEmpty()) {
+                            System.out.println("No tags available. Please create tags in Manage Tags menu first.");
+                        } else {
+                            System.out.println("Available Tags:");
+                            for (Tag t : loggedInUser.getAvailableTags()) {
+                                System.out.println("- " + t.getName());
+                            }
+                            System.out.print("Enter tag name to add: ");
+                            String tagToAdd = sc.nextLine().trim();
+                            
+                            while (tagToAdd.isEmpty()) {
+                                tagToAdd = sc.nextLine().trim();
+                            }
+                            
+                            try {
+                                Tag tag = new Tag(tagToAdd);
+                                if (loggedInUser.getAvailableTags().contains(tag)) {
+                                    selectedContact.addTags(tag);
+                                    System.out.println("Tag added successfully.");
+                                } else {
+                                    System.out.println("Tag does not exist in your available pool.");
+                                }
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Invalid tag name.");
+                            }
+                        }
+                        break;
+                    case "2": //removing tags
+                        if (selectedContact.getTags().isEmpty()) {
+                            System.out.println("No tags to remove.");
+                        } else {
+                            System.out.print("Enter tag name to remove: ");
+                            String tagToRemove = sc.nextLine();
+                            
+                            while (tagToRemove.isEmpty()) {
+                                tagToRemove = sc.nextLine();
+                            }
+                            
+                            try {
+                                Tag tag = new Tag(tagToRemove);
+                                if (selectedContact.getTags().contains(tag)) {
+                                    selectedContact.removeTag(tag);
+                                    System.out.println("Tag removed successfully."); 
+                                } else {
+                                    System.out.println("Contact does not have this tag.");
+                                }
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Invalid tag name.");
+                            }
+                        }
+                        break;
+                    case "3":
+                        managingTags = false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+        }
+    }
 }

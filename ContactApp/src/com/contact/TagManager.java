@@ -3,6 +3,7 @@ package com.contact;
 import com.userregistration.User;
 import java.util.Scanner;
 
+//for creating deletiing and viewing tags
 public class TagManager {
 	public static void manageTags(Scanner sc, User loggedInUser) {
 		boolean managing = true;

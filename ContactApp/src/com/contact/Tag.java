@@ -2,7 +2,7 @@ package com.contact;
 import java.util.Objects;
 
 public class Tag {
-	
+	//FOR managing tags for contacts
 	private String name;
 	public Tag(String name) {
 		if(name==null || name.isEmpty()) {
