@@ -1,14 +1,15 @@
 package com.userregistration;
 
 import com.contact.ContactManager;
-import com.userregistration.*;
+import com.search.*;
 import java.util.Scanner;
 import java.util.HashMap;
-
+//class for managing logged in profiles
 public class ProfileManager {
     public static void manageProfile(Scanner sc, User loggedInUser,HashMap<String,String> credentials) {
         boolean managing = true;
         while (managing) {
+        	//Options for users
             System.out.println("\n=== PROFILE MANAGEMENT ===");
             System.out.println("1. Update First Name");
             System.out.println("2. Update Last Name");
@@ -22,13 +23,14 @@ public class ProfileManager {
             System.out.println("10. Edit Contact");
             System.out.println("11. Delete Contact");
             System.out.println("12. Bulk Operations");
-            System.out.println("13. Logout");
+            System.out.println("13. Search Contacts");
+            System.out.println("14. Logout");
             System.out.print("Enter your choice: ");
             
             String choice = sc.nextLine();
             
             switch (choice) {
-                case "1":
+                case "1": //First Name update
                     System.out.print("Enter new First Name: ");
                     String newFirstName = sc.nextLine();
                     if (!newFirstName.trim().isEmpty()) {
@@ -39,7 +41,7 @@ public class ProfileManager {
                         System.out.println("Invalid input.");
                     }
                     break;
-                case "2":
+                case "2": //LastName update
                     System.out.print("Enter new Last Name: ");
                     String newLastName = sc.nextLine();
                     if (!newLastName.trim().isEmpty()) {
@@ -50,7 +52,7 @@ public class ProfileManager {
                         System.out.println("Invalid input.");
                     }
                     break;
-                case "3":
+                case "3": //mobile update
                     System.out.print("Enter new Mobile Number: ");
                     String newMobile = sc.nextLine();
                     if (!newMobile.trim().isEmpty()) {
@@ -61,7 +63,7 @@ public class ProfileManager {
                         System.out.println("Invalid input.");
                     }
                     break;
-                case "4":
+                case "4": // email update
                     System.out.print("Enter new Email: ");
                     String newEmail = sc.nextLine();
                     if (EmailValidator.isValidEmail(newEmail)) {
@@ -72,7 +74,7 @@ public class ProfileManager {
                         System.out.println("Invalid Email Format.");
                     }
                     break;
-                case "5":
+                case "5": //password update
                     System.out.print("Enter new Password: ");
                     String newPassword = sc.nextLine();
                     if (!newPassword.trim().isEmpty()) {
@@ -85,28 +87,31 @@ public class ProfileManager {
                         System.out.println("Invalid input.");
                     }
                     break;
-                case "6":
+                case "6": //display user details
                     loggedInUser.showUserDetails();
                     break;
-                case "7":
+                case "7": //creating contact
                     ContactManager.createContact(sc, loggedInUser);
                     break;
-                case "8":
+                case "8": //displaying contact list
                     ContactManager.viewContactsList(loggedInUser);
                     break;
-                case "9":
+                case "9": //specific contact details
                     ContactManager.viewContactDetails(sc, loggedInUser);
                     break;
-                case "10":
+                case "10": //editign contact
                 	ContactManager.editContact(sc, loggedInUser);
                 	break;
-                case "11":
+                case "11": //deleting contact
                 	ContactManager.deleteContact(sc, loggedInUser);
                 	break;
-                case "12":
+                case "12": //bulk operation(delete and adding tags)
                 	ContactManager.bulkOperations(sc, loggedInUser);
                 	break;
-                case "13":
+                case "13": //searching contact
+                	SearchManager.performSearch(sc, loggedInUser);
+                	break;
+                case "14": //logout
                     System.out.println("Logging out");
                     managing = false;
                     break;

@@ -1,6 +1,6 @@
-/*UC-08 : Bulk Operations on Contacts
+/*UC-09 : Search and filter
 @author : Developer
-version : 8.0
+version : 9.0
 */
 package com.main;
 import com.userregistration.*;
