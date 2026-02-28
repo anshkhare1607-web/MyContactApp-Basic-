@@ -1,6 +1,7 @@
 package com.userregistration;
 
 import com.contact.ContactManager;
+import com.contact.TagManager;
 import com.search.*;
 import java.util.Scanner;
 import java.util.HashMap;
@@ -25,7 +26,8 @@ public class ProfileManager {
             System.out.println("12. Bulk Operations");
             System.out.println("13. Search Contacts");
             System.out.println("14. Filter/Sort contacts");
-            System.out.println("14. Logout");
+            System.out.println("15. Manage Tags");
+            System.out.println("16. Logout");
             System.out.print("Enter your choice: ");
             
             String choice = sc.nextLine();
@@ -115,7 +117,9 @@ public class ProfileManager {
                 case "14":
                 	FilterManager.applyFilter(sc, loggedInUser);
                 	break;
-                case "15": //logout
+                case "15": //Manage tags
+                	TagManager.manageTags(sc, loggedInUser); 
+                case "16": //logout
                     System.out.println("Logging out");
                     managing = false;
                     break;

@@ -10,7 +10,7 @@ public abstract class Contact {
 	private LocalDateTime createdAt;
 	private List<MobileNumber> mobileNumbers;
 	private List<Email> emails;
-	private List<String> tags; //for storing tags
+	private Set<Tag> tags; //for storing tags
 	private int interactionCount;
 	
 	public Contact() {
@@ -18,12 +18,10 @@ public abstract class Contact {
 		this.createdAt = LocalDateTime.now(); //Time of creation of contact
 		this.mobileNumbers = new ArrayList<>(); //list for storing multiple mobile numbers
 		this.emails = new ArrayList<>(); //list for storing emails
-		this.tags = new ArrayList<>(); //initialize
+		this.tags = new HashSet<>(); //initialize
 		this.interactionCount = 0; //storing interaction count for filtering
 		
 	}
-	
-
 	//deep copy 
 	protected Contact(Contact contact) {
 		this.id = contact.id;
@@ -38,7 +36,7 @@ public abstract class Contact {
 		for(Email e : contact.emails) {
 			this.emails.add(new Email(e));
 		}
-		this.tags = new ArrayList<>(this.tags);
+		this.tags = new HashSet<>(contact.tags); 
 		this.interactionCount = contact.interactionCount;
 	}
 	
@@ -54,10 +52,13 @@ public abstract class Contact {
 	public void addEmail(Email email) {
 		this.emails.add(email);
 	}
-	public void addTags(String tag) {
-		if(tag!=null && !tag.isEmpty()) {
+	public void addTags(Tag tag) {
+		if(tag!=null) {
 			this.tags.add(tag);
 		}
+	}
+	public Set<Tag> getTags(){
+		return new HashSet<>(tags);
 	}
 	
 	public int getInteractionCount() {
@@ -68,7 +69,6 @@ public abstract class Contact {
 		this.interactionCount++;
 	}
 
-	
 	//Returns Defensive shallow copy of the list to protect internal state
 	public List<Email> getEmails(){
 		return new ArrayList<>(emails);
@@ -79,9 +79,6 @@ public abstract class Contact {
 		return new ArrayList<>(mobileNumbers);
 	}
 	
-	public List<String> getTags(){
-		return new ArrayList<>(tags);
-	}
 	public abstract void displayContact();
 	
 	

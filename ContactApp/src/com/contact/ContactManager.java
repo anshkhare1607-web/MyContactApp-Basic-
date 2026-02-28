@@ -257,14 +257,16 @@ public class ContactManager {
 				System.out.println("Deletion aborted.");
 			}
 		} else if (opChoice.equals("2")) {
-			System.out.print("Enter tag to apply to selected contacts (e.g., Work, Friend): ");
-			String tag = sc.nextLine();
-			if (tag != null && !tag.trim().isEmpty()) {
+			System.out.print("Enter tag to apply to selected contacts (e.g., Work/Friend): ");
+			String tagName = sc.nextLine();
+			try {
+				Tag tag = new Tag(tagName);
+				loggedInUser.getAvailableTags().add(tag); //register tag in user's memory
 				for (Contact c : selectedContacts) {
 					c.addTags(tag);
 				}
 				System.out.println("Tag applied successfully to " + selectedContacts.size() + " contacts.");
-			} else {
+			} catch (IllegalArgumentException e) {
 				System.out.println("Invalid tag. Aborted.");
 			}
 		}

@@ -42,11 +42,17 @@ public class OrganizationContact extends Contact{
 	//override
 	public void displayContact() {
 		System.out.printf("Organization Name : %s \n Website : %s%n",orgName,website);
-		System.out.printf("Tags: %s%n",getTags());
 		System.out.printf("Contact ID : %s%n",getID());
 		System.out.printf("Created at : %s%n",getCreatedTime()); 
 		System.out.printf("Total Interactions : %s%n", getInteractionCount());
-
+		if(!getTags().isEmpty()) {
+			System.out.print("Tags: ");
+			int count = 0;
+			for(Tag t : getTags()) {
+				System.out.print(t.getName()+(++count < getTags().size() ? ", ":""));
+			}
+			System.out.println();
+		}
 		for(MobileNumber m : getMobileNumbers()) {
 			System.out.println(" "+m);
 		}

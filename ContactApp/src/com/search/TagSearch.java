@@ -12,8 +12,8 @@ public class TagSearch implements ContactSearch{
 		String lowerQuery = query.toLowerCase();
 		
 		for(Contact c : contacts) {
-			for(String tag : c.getTags()) {
-				if(tag.toLowerCase().contains(lowerQuery)) {
+			for(Tag tag : c.getTags()) {
+				if(tag.getName().toLowerCase().contains(lowerQuery)) {
 					results.add(c);
 					
 				}

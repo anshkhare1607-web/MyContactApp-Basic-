@@ -1,4 +1,5 @@
 package com.userregistration;
+import com.contact.*;
 import java.util.*;
 import com.contact.Contact;
 
@@ -8,6 +9,7 @@ public abstract class User {
 	private String passwordHash;
 	private UserProfile profile;
 	private List<Contact> contacts = new ArrayList<>(); //Storing contacts for each user
+	private Set<Tag> availableTags = new HashSet<>(); //Storing tags
 	
 	public User(String email,String passwordHash,UserProfile profile) {
 		this.email = email;
@@ -37,6 +39,12 @@ public abstract class User {
 	
 	public List<Contact> getContacts(){
 		return contacts;
+	}
+	public Set<Tag> getAvailableTags(){
+		if(availableTags == null) {
+			availableTags = new HashSet<>();
+		}
+		return availableTags;
 	}
 	public abstract void showUserDetails();
 }

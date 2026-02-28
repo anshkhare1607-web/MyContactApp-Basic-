@@ -14,8 +14,8 @@ public class TagFilter implements ContactFilter{
 	public List<Contact> apply(List<Contact> contacts){
 		List<Contact> filtered = new ArrayList<>();
 		for(Contact c : contacts) {
-			for(String tag : c.getTags()) {
-				if(tag.equalsIgnoreCase(tag)) {
+			for(Tag tag : c.getTags()) {
+				if(tag.getName().toLowerCase().contains(targetTag)) {
 					filtered.add(c);
 					break;
 				}
